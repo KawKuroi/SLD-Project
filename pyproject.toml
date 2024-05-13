@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "django-tuto"
+version = "0.1.0"
+description = ""
+authors = ["Axel"]
+readme = "README.md"
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.0.6"
+djangorestframework = "^3.15.1"
+django-cors-headers = "^4.3.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

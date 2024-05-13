@@ -1,0 +1,62 @@
+strong,
+span {
+	color: aliceblue;
+}
+strong {
+	font-weight: 800;
+}
+
+.twitter-card-box {
+	width: 70vw;
+	background: #333;
+	display: flex;
+	justify-content: space-between;
+	padding: 5%;
+}
+
+header {
+	width: 50%;
+	display: flex;
+	align-items: center;
+
+	& div {
+		display: flex;
+		flex-direction: column;
+		margin-left: 5%;
+	}
+
+	& img {
+		width: 80px;
+		border-radius: 50%;
+	}
+}
+
+aside {
+	width: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: end;
+
+	& .twitter-button {
+		border: none;
+		width: 100px;
+		padding: 5%;
+		background: #fff;
+		cursor: pointer;
+		border-radius: 15%;
+		transition: background-color 0.2s;
+
+		&:hover {
+			background-color: rgb(122, 242, 113);
+		}
+
+		& p {
+			font-size: 15px;
+			font-weight: 600;
+		}
+	}
+}
+.twitter-button.is-following:hover {
+    background-color: #ee6e4f;
+}
+  

@@ -1,0 +1,35 @@
+h2,p,strong {
+    color:aliceblue
+}
+
+
+.SimpleCard-box {
+    background: #333;
+    max-width: 300px;
+    max-height: 600px;
+    border-radius: 5%;
+
+    & .SimpleCard-img-box{
+        background: #000;
+        width: 100%;
+
+        & img {
+            width: 100%;
+        }
+    }
+}
+
+.SimpleCard-text-box {
+    padding: 5%;
+    text-align: justify;
+
+    & h2 {
+        font-size: 30px;
+        margin-bottom: 5%;
+    }
+
+    & strong {
+        font-weight: 700;
+        color: green;
+    }
+}
