@@ -15,7 +15,6 @@ export default function Navigation() {
                 </ul>
             </nav>
             <Link className ="btn" to="/traductor"><button> Traductor SLD</button></Link>
-            <Link className ="btn" to="/signOut"><button> Cerrar sesion</button></Link>
         </header>
     )
 }

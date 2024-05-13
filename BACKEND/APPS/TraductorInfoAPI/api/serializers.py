@@ -5,4 +5,3 @@ class documentSerializer(serializers.ModelSerializer):
     class Meta:
         model = documents
         fields = '__all__' # Alternativa = ['content','user']
-

@@ -55,6 +55,11 @@ textarea {
     height: 55px;
     width: 65%;
     resize: none;
+    padding-left: 25px;
+    padding-top: 10px;
+}
+textarea:focus{
+    outline:none;
 }
 
 .botones{
@@ -100,8 +105,25 @@ textarea {
     color: #0B1957;
     font-size: smaller;
 }
+.traductor-form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    align-items: center;
+}
 
+span {
+    color: rgb(253, 81, 81);
+    line-height: normal;
+    font-size: 15px;
+    font-weight: 600;
+}
 
+.success{
+    color: #217b0e;
+    font-size:23px ;
+}
 /*pantalla dividida*/
 
 .camara{

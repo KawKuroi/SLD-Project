@@ -1,10 +1,7 @@
 from django.urls import path,include
-from rest_framework import routers
-from BACKEND.APPS.TraductorInfoAPI.api import views
-
-router = routers.DefaultRouter()
-router.register(r'',views.documentView, 'documents')
+from BACKEND.APPS.TraductorInfoAPI.api.api import document_api_view, document_detail_view
 
 urlpatterns = [
-    path('api/',include(router.urls)),
+    path('api/', document_api_view, name='documentAPI'),
+    path('api/<int:pk>/',document_detail_view, name='searchAPI')
 ]

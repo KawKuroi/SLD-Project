@@ -1,6 +1,32 @@
+import { useForm } from "react-hook-form";
 import "./styles/traductor.css";
+import { createMail } from "../api/Task.api";
+import { useState } from "react";
 
 export default function Traductor() {
+	// módulos de react-hook-form para manejo de formularios
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		reset,
+	} = useForm();
+
+	// función que se ejecuta cuando se da click a el botón de enviar correo
+	const onSubmit = handleSubmit(async (data) => {
+		console.log("Cargando");
+		const res = await createMail(data);
+		console.log(res);
+		console.log("Enviado");
+		setSuccessMessage('Correo enviado correctamente ✅!');
+		reset();
+	});
+
+	// jjj
+	const [successMessage, setSuccessMessage] = useState('');
+
+	
+	// Página web
 	return (
 		<section className="camara">
 			<div className="izquierda">
@@ -8,11 +34,8 @@ export default function Traductor() {
 					id="video_camara"
 					playsInline
 					autoPlay
-					style={{width: 1}}></video>
-				<canvas
-					id="canva_camara"
-					width="400"
-					height="400"></canvas>
+					style={{ width: 1 }}></video>
+				<canvas id="canva_camara" width="400" height="400"></canvas>
 				<canvas
 					id="canva_camara_pequenia"
 					width="28"
@@ -51,9 +74,32 @@ export default function Traductor() {
 					</div>
 				</div>
 
-				<form action="" method="POST">
-					<button className="botones send_btn"> Enviar </button>
+				<form className="traductor-form" onSubmit={onSubmit} action="/">
+					{errors.content && <span>Este campo es requerido</span>}
+					<textarea
+						autoFocus
+						type="text"
+						placeholder="*Traducción"
+						{...register("content", { required: true })}
+					/>
+					{errors.name && <span>Este campo es requerido</span>}
+					<textarea
+						type="text"
+						placeholder="*Nombre"
+						{...register("name", { required: true })}
+					/>
+					{errors.email && <span>Este campo es requerido</span>}
+					<textarea
+						type="text"
+						placeholder="*Correo"
+						{...register("email", { required: true })}
+					/>
+					<button className="botones send_btn">
+						{" "}
+						Enviar Correo{" "}
+					</button>
 				</form>
+				{successMessage && <span className="success">{successMessage}</span>}
 			</div>
 		</section>
 	);

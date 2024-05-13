@@ -1,5 +1,5 @@
 import axios from 'axios'
 
-export const getAllObjects = () => {
-    return axios.get('http://localhost:8000/testapp/api/')
+export const createMail = (mail) => {
+    return axios.post('http://localhost:8000/send_email/',mail)
 }
