@@ -28,7 +28,7 @@ BASE_APPS = [
 ]
 
 LOCAL_APPS = [
-    'BACKEND.APPS.TESTAPP',
+    'BACKEND.APPS.TraductorInfoAPI',
 ]
 
 THIRD_APPS = [

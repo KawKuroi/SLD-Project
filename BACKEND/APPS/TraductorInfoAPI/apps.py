@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class TestappConfig(AppConfig):
+class TraductorInfoAPIorInfoAPIConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'BACKEND.APPS.TESTAPP'
+    name = 'BACKEND.APPS.TraductorInfoAPI'
