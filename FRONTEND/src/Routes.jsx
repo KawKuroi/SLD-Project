@@ -8,9 +8,6 @@ import Herramientas from "./pages/Herramientas.jsx";
 import Nosotros from "./pages/Nosotros.jsx";
 import Traductor from "./pages/Traductor.jsx";
 
-const AboutUs = () => <h1>AboutUs page</h1>;
-const Contact = () => <h1>Contact page</h1>;
-
 export default function ProyectRoutes() {
 	return (
 		<BrowserRouter>

@@ -15,8 +15,14 @@ from email.mime.text import MIMEText
 from .serializers import documentSerializer 
 import os
 
+folder_path = "./translations"
+
 def create_text_file(name, content):
-    with open(f"{name}.txt", "w", encoding='utf-8') as file:
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+
+    full_path = os.path.join(folder_path, f"{name}.txt")
+    with open(full_path, "w", encoding='utf-8') as file:
         file.write(f"{name}\n{content}")
 
 
@@ -46,9 +52,6 @@ def send_email(name, email, content):
             server.sendmail(message['From'], message['To'], message_as_string)
     except (IOError, UnicodeDecodeError) as e:
         print(f"Error creating or opening text file / sending email: {e}")
-
-    # Delete the generated text file after sending
-    os.remove(text_file_path)
 
 class SendEmailView(APIView):
     def post(self, request):
