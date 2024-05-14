@@ -11,24 +11,44 @@ from email.mime.multipart import MIMEMultipart # Aumentar cantidad de texto en e
 from email.mime.base import MIMEBase  # Adjuntar archivos
 from email.mime.text import MIMEText
 
-# Import para operaciones con el sistema de archivos
-import os  
-
 # Serializador para leer el POST
 from .serializers import documentSerializer 
+import os
+
+def create_text_file(name, content):
+    with open(f"{name}.txt", "w", encoding='utf-8') as file:
+        file.write(f"{name}\n{content}")
+
 
 def send_email(name, email, content):
-    message = MIMEMultipart()  
-    text_part = MIMEText(f'Traducción enviada con exito ✅\nMuchas gracias por utilizar el servicio! 🤙 \n\nTraducción:{content}\nEnviado a {email}! 👋')
-    message.attach(text_part)   
+    message = MIMEMultipart()
     message['Subject'] = f'Traducción para {name}'
     message['From'] = EMAIL_HOST_USER
     message['To'] = email
 
-    with smtplib.SMTP(EMAIL_HOST, EMAIL_PORT) as server:
-        server.starttls()
-        server.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD)
-        server.sendmail(message['From'], message['To'], message.as_string())
+    text_file_path = f"{name}.txt"
+    with open(text_file_path, "w", encoding='utf-8') as file:
+        file.write(f"Traducción enviada con exito ✅\n\nMuchas gracias por utilizar el servicio {name} !  \n\n\nTraducción: {content}\n\nEnviado a {email}! ")
+
+    try:
+        # Attach text file to email
+        with open(text_file_path, "r", encoding='utf-8') as attachment:
+            part = MIMEBase('application', 'octet-stream')
+            part.set_payload(attachment.read())
+            part.add_header('Content-Disposition', f'attachment; filename="{text_file_path}"')
+            message.attach(part)
+            message_as_string = message.as_string().encode('utf-8')
+
+        # Send email with attachment
+        with smtplib.SMTP(EMAIL_HOST, EMAIL_PORT) as server:
+            server.starttls()
+            server.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD)
+            server.sendmail(message['From'], message['To'], message_as_string)
+    except (IOError, UnicodeDecodeError) as e:
+        print(f"Error creating or opening text file / sending email: {e}")
+
+    # Delete the generated text file after sending
+    os.remove(text_file_path)
 
 class SendEmailView(APIView):
     def post(self, request):
