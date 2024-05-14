@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import "./styles/traductor.css";
 import { createMail } from "../api/Task.api";
 import { useState } from "react";
+import CameraPrediction from "../components/Camara/Camara.jsx";
 
 export default function Traductor() {
 	// módulos de react-hook-form para manejo de formularios
@@ -18,28 +19,18 @@ export default function Traductor() {
 		const res = await createMail(data);
 		console.log(res);
 		console.log("Enviado");
-		setSuccessMessage('Correo enviado correctamente ✅!');
+		setSuccessMessage("Correo enviado correctamente ✅!");
 		reset();
 	});
 
-	// jjj
-	const [successMessage, setSuccessMessage] = useState('');
+	// Esto Hook permite agregar un mensaje de enviado correctamente
+	const [successMessage, setSuccessMessage] = useState("");
 
-	
 	// Página web
 	return (
 		<section className="camara">
 			<div className="izquierda">
-				<video
-					id="video_camara"
-					playsInline
-					autoPlay
-					style={{ width: 1 }}></video>
-				<canvas id="canva_camara" width="400" height="400"></canvas>
-				<canvas
-					id="canva_camara_pequenia"
-					width="28"
-					height="28"></canvas>
+				<CameraPrediction />
 			</div>
 
 			<div className="derecha">
@@ -99,7 +90,9 @@ export default function Traductor() {
 						Enviar Correo{" "}
 					</button>
 				</form>
-				{successMessage && <span className="success">{successMessage}</span>}
+				{successMessage && (
+					<span className="success">{successMessage}</span>
+				)}
 			</div>
 		</section>
 	);
